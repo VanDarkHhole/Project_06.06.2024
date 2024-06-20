@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 
@@ -27,6 +28,7 @@ public class Ball : MonoBehaviour
         newBallVector.x = Random.Range(-1f, 1f);
         newBallVector.y = Random.Range(-1f, 1f);
         rigidbody2D.velocity = newBallVector * Speed;
+        rigidbody2D.velocity = newBallVector.normalized * Speed;    
     }
 
     // Update is called once per frame
@@ -36,5 +38,21 @@ public class Ball : MonoBehaviour
         {
             SendBallInRandomDirection();
         }
+    }
+
+
+
+    private void OnTriggerEnter2D (Collider2D collision)
+    {
+        if (transform.position.x > 0)
+        {
+            Debug.Log("Player left +1");
+        }
+        else
+        {
+            Debug.Log("Player Right +1");
+        }
+
+        SendBallInRandomDirection();
     }
 }
