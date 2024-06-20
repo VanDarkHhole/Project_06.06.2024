@@ -28,11 +28,11 @@ public class Movement : MonoBehaviour
     // Update is called once per frame 
     void Update()
     {
-        if (Input.GetKey(Upkey))
+        if (Input.GetKey(Upkey) && transform.position.y < 4.5f  )
         {
             rigid.velocity = Vector2.up * speed;
         }
-        else if (Input.GetKey(Downkey))
+        else if (Input.GetKey(Downkey) && transform.position.y > -4.5f )
         {
             rigid.velocity = Vector2.down * speed;
         }
