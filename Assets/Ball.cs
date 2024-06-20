@@ -40,6 +40,15 @@ public class Ball : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Movement>() == null)
+            return;
+
+        collision.gameObject.GetComponent<Movement>().speed *= 1.1f;
+        rigidbody2D.velocity *= 1.1f;
+    }
+
 
 
     private void OnTriggerEnter2D (Collider2D collision)
