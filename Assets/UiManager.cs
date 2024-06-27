@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UiManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public TextMeshProUGUI Scoreright;
+    public TextMeshProUGUI Scoreleft;
+
+
+    public void SetScoreleftText(string text)
     {
-        
+
+        Scoreleft.SetText(text);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetScorerightText(string text)
     {
-        
+
+        Scoreleft.SetText(text);
     }
 }

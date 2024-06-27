@@ -1,14 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Ball : MonoBehaviour
 {   
     public Rigidbody2D rigidbody2D;
     public float Speed = 6f;
     public UiManager UiManager;
+
+    public int Scoreright;
+    public int Scoreleft;
+
+    public static event Action BallReset;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +26,11 @@ public class Ball : MonoBehaviour
 
     private void SendBallInRandomDirection()
     {
+
+
+        BallReset?.Invoke();
+
+
         rigidbody2D.velocity = Vector3.zero;
         rigidbody2D.isKinematic = true;
         transform.position = Vector3.zero;
@@ -27,8 +39,11 @@ public class Ball : MonoBehaviour
 
         Vector2 newBallVector = new Vector2();
         newBallVector.x = Random.Range(-1f, 1f);
+
         newBallVector.y = Random.Range(-1f, 1f);
+
         rigidbody2D.velocity = newBallVector * Speed;
+
         rigidbody2D.velocity = newBallVector.normalized * Speed;    
     }
 
@@ -57,10 +72,14 @@ public class Ball : MonoBehaviour
         if (transform.position.x > 0)
         {
             Debug.Log("Player left +1");
+            Scoreleft++;
+            UiManager.SetScoreleftText(Scoreleft.ToString());
         }
         else
         {
             Debug.Log("Player Right +1");
+            Scoreright++;
+            UiManager.SetScorerightText(Scoreright.ToString());
         }
 
         SendBallInRandomDirection();
